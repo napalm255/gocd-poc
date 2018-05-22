@@ -4,8 +4,6 @@ environments:
   pocenv:
     environment_variables:
       DEPLOYMENT: testing
-    secure_variables:
-      ENV_PASSWORD: "s&Du#@$xsSa"
 pipelines:
   proof_of_concept:
     group: mygroup
