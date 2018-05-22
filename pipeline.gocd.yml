@@ -23,7 +23,7 @@ pipelines:
           jobs:
             virtualenv:
               resources:
-                - linux
+                - python
               tasks:
                 - exec:
                     command: /usr/bin/python
@@ -40,3 +40,53 @@ pipelines:
                       - install
                       - -r
                       - requirements.txt
+      - build:
+          clean_workspace: true
+          jobs:
+            build:
+              resources:
+                - linux
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - "echo Hello World!"
+                      - ">"
+                      - build_artifact.txt
+      - tests:
+          clean_workspace: true
+          jobs:
+            unit_tests:
+              resources:
+                - linux
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - "echo UNIT TESTS!"
+                      - ">"
+                      - unit_tests.txt
+            sonar:
+              resources:
+                - linux
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - "echo SONAR!"
+                      - ">"
+                      - sonarqube.txt
+            owasp:
+              resources:
+                - linux
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - "echo OWASP!"
+                      - ">"
+                      - owasp.txt
