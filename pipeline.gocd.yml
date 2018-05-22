@@ -43,6 +43,7 @@ pipelines:
   build:
     group: poc
     lock_behavior: none
+    materials: ""
     stages:
       - build:
           clean_workspace: true
