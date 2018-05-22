@@ -22,6 +22,9 @@ pipelines:
           clean_workspace: true
           jobs:
             virtualenv:
+              run_instance: 1
+              resources:
+                - linux
               tasks:
                 - exec:
                     command: /usr/bin/python
