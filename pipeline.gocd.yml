@@ -5,9 +5,10 @@ environments:
     environment_variables:
       DEPLOYMENT: testing
     pipelines:
-      - build-par
+      - par_setup
+      - build
 pipelines:
-  setup:
+  par_setup:
     group: poc
     lock_behavior: none
     materials:
