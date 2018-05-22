@@ -5,8 +5,8 @@ environments:
     environment_variables:
       DEPLOYMENT: testing
 pipelines:
-  poc:
-    group: demo
+  setup:
+    group: poc
     lock_behavior: none
     materials:
       powerbash:
