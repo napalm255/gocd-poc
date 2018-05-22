@@ -9,10 +9,6 @@ pipelines:
     group: poc
     lock_behavior: none
     materials:
-      powerbash:
-        git: https://github.com/napalm255/powerbash.git
-        branch: master
-        destination: powerbash
       vmware_drs:
         git: https://github.com/napalm255/ansible-vmware_drs.git
         branch: master
@@ -48,10 +44,6 @@ pipelines:
         git: https://github.com/napalm255/powerbash.git
         branch: master
         destination: powerbash
-      vmware_drs:
-        git: https://github.com/napalm255/ansible-vmware_drs.git
-        branch: master
-        destination: vmware_drs
     stages:
       - build:
           clean_workspace: true
@@ -75,7 +67,7 @@ pipelines:
                 - linux
               tasks:
                 - fetch:
-                    pipeline: setup
+                    pipeline: build
                     stage: build
                     job: build
                     source: build_artifact.txt
@@ -92,7 +84,7 @@ pipelines:
                 - linux
               tasks:
                 - fetch:
-                    pipeline: setup
+                    pipeline: build
                     stage: build
                     job: build
                     source: build_artifact.txt
@@ -109,7 +101,7 @@ pipelines:
                 - linux
               tasks:
                 - fetch:
-                    pipeline: setup
+                    pipeline: build
                     stage: build
                     job: build
                     source: build_artifact.txt
