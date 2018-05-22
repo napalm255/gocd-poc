@@ -40,6 +40,10 @@ pipelines:
                       - install
                       - -r
                       - requirements.txt
+  build:
+    group: poc
+    lock_behavior: none
+    stages:
       - build:
           clean_workspace: true
           jobs:
@@ -61,6 +65,12 @@ pipelines:
               resources:
                 - linux
               tasks:
+                - fetch:
+                    pipeline: setup
+                    stage: build
+                    job: build
+                    source: build_artifact.txt
+                    destination: build_artifact.txt
                 - exec:
                     command: /bin/bash
                     arguments:
@@ -72,6 +82,12 @@ pipelines:
               resources:
                 - linux
               tasks:
+                - fetch:
+                    pipeline: setup
+                    stage: build
+                    job: build
+                    source: build_artifact.txt
+                    destination: build_artifact.txt
                 - exec:
                     command: /bin/bash
                     arguments:
@@ -83,6 +99,12 @@ pipelines:
               resources:
                 - linux
               tasks:
+                - fetch:
+                    pipeline: setup
+                    stage: build
+                    job: build
+                    source: build_artifact.txt
+                    destination: build_artifact.txt
                 - exec:
                     command: /bin/bash
                     arguments:
