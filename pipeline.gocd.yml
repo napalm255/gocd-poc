@@ -20,6 +20,9 @@ pipelines:
         git: https://github.com/napalm255/ansible-vmware_drs.git
         branch: master
         destination: vmware_drs
+    artifacts:
+      - venv:
+          source: venv/
     stages:
       - setup:
           jobs:
@@ -52,6 +55,9 @@ pipelines:
         destination: powerbash
     tabs:
       build: build_artifact.txt
+    artifacts:
+      - results:
+          source: build_artifact.txt
     stages:
       - build:
           jobs:
