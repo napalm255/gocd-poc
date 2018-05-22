@@ -8,7 +8,7 @@ environments:
       - poc_setup
       - poc_build
     agents:
-      - ip-172-31-67-109 (127.0.0.1)
+      - 59694d0c-c8b8-4247-89d5-962f2f0bd0b4
 pipelines:
   poc_setup:
     group: poc
