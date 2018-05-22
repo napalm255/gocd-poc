@@ -54,10 +54,11 @@ pipelines:
         branch: master
         destination: powerbash
     tabs:
-      build: build_artifact.txt
+      build: powerbash.sh
     artifacts:
       - results:
-          source: build_artifact.txt
+          source: powerbash.sh
+          destination: powerbash.sh
     stages:
       - build:
           jobs:
@@ -66,12 +67,9 @@ pipelines:
                 - linux
               tasks:
                 - exec:
-                    command: /bin/bash
+                    command: /bin/cat
                     arguments:
-                      - -c
-                      - "echo Hello World!"
-                      - ">"
-                      - build_artifact.txt
+                      - powerbash.sh
   poc_tests:
     group: poc
     lock_behavior: none
@@ -92,15 +90,12 @@ pipelines:
                     pipeline: poc_build
                     stage: build
                     job: build
-                    source: build_artifact.txt
-                    destination: build_artifact.txt
+                    source: powerbash.sh
+                    destination: powerbash.sh
                 - exec:
-                    command: /bin/bash
+                    command: /bin/cat
                     arguments:
-                      - -c
-                      - "echo UNIT TESTS!"
-                      - ">"
-                      - unit_tests.txt
+                      - powerbash.sh
             sonar:
               resources:
                 - linux
@@ -109,15 +104,12 @@ pipelines:
                     pipeline: poc_build
                     stage: build
                     job: build
-                    source: build_artifact.txt
-                    destination: build_artifact.txt
+                    source: powerbash.sh
+                    destination: powerbash.sh
                 - exec:
-                    command: /bin/bash
+                    command: /bin/cat
                     arguments:
-                      - -c
-                      - "echo SONAR!"
-                      - ">"
-                      - sonarqube.txt
+                      - powerbash.sh
             owasp:
               resources:
                 - linux
@@ -126,15 +118,12 @@ pipelines:
                     pipeline: poc_build
                     stage: build
                     job: build
-                    source: build_artifact.txt
-                    destination: build_artifact.txt
+                    source: powerbash.sh
+                    destination: powerbash.sh
                 - exec:
-                    command: /bin/bash
+                    command: /bin/cat
                     arguments:
-                      - -c
-                      - "echo OWASP!"
-                      - ">"
-                      - owasp.txt
+                      - powerbash.sh
   poc_deploy:
     group: poc
     lock_behavior: none
