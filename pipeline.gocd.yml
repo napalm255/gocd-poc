@@ -24,18 +24,16 @@ pipelines:
             virtualenv:
               tasks:
                 - exec:
-                    command: echo
-                    arguments:
-                      - "Hello World"
-                - exec:
                     command: /usr/bin/python
                     arguments:
                       - -m
                       - virtualenv
                       - venv
                 - exec:
-                    command: venv/bin/python
+                    command: ../venv/bin/python
+                    working_directory: vmware_drs
                     arguments:
                       - -m
                       - pip
-                      - list
+                      - install
+                      - -r requirements.txt
