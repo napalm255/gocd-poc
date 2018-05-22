@@ -5,17 +5,20 @@ environments:
     environment_variables:
       DEPLOYMENT: testing
 pipelines:
-  proof_of_concept:
-    group: mygroup
+  poc:
+    group: demo
     lock_behavior: none
-    parameters:
-      param1: value1
     materials:
       powerbash:
         git: https://github.com/napalm255/powerbash.git
         branch: master
+        destination: powerbash
+      vmware_drs:
+        git: https://github.com/napalm255/ansible-vmware_drs.git
+        branch: master
+        destination: vmware_drs
     stages:
-      - build:
+      - setup:
           clean_workspace: true
           jobs:
             virtualenv:
@@ -24,3 +27,15 @@ pipelines:
                     command: echo
                     arguments:
                       - "Hello World"
+                - exec:
+                    command: /usr/bin/python
+                    arguments:
+                      - -m
+                      - virtualenv
+                      - venv
+                - exec:
+                    command: venv/bin/python
+                    arguments:
+                      - -m
+                      - pip
+                      - list
