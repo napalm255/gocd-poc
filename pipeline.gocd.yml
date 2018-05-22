@@ -139,6 +139,9 @@ pipelines:
       build:
         pipeline: poc_build
         stage: build
+      tests:
+        pipeline: poc_tests
+        stage: tests
     tabs:
       build: deploy_artifact.txt
     stages:
