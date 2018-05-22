@@ -5,10 +5,12 @@ environments:
     environment_variables:
       DEPLOYMENT: testing
     pipelines:
-      - par_setup
-      - build
+      - poc_setup
+      - poc_build
+    agents:
+      - ip-172-31-67-109 (127.0.0.1)
 pipelines:
-  par_setup:
+  poc_setup:
     group: poc
     lock_behavior: none
     materials:
@@ -39,7 +41,7 @@ pipelines:
                       - install
                       - -r
                       - requirements.txt
-  build:
+  poc_build:
     group: poc
     lock_behavior: none
     materials:
@@ -47,6 +49,8 @@ pipelines:
         git: https://github.com/napalm255/powerbash.git
         branch: master
         destination: powerbash
+    tabs:
+      build: build_artifact.txt
     stages:
       - build:
           clean_workspace: true
@@ -62,6 +66,16 @@ pipelines:
                       - "echo Hello World!"
                       - ">"
                       - build_artifact.txt
+  poc_tests:
+    group: poc
+    lock_behavior: none
+    materials:
+      build:
+        pipeline: poc_build
+        stage: build
+    tabs:
+      test: unit_tests.txt
+    stages:
       - tests:
           clean_workspace: true
           jobs:
@@ -70,7 +84,7 @@ pipelines:
                 - linux
               tasks:
                 - fetch:
-                    pipeline: build
+                    pipeline: poc_build
                     stage: build
                     job: build
                     source: build_artifact.txt
@@ -87,7 +101,7 @@ pipelines:
                 - linux
               tasks:
                 - fetch:
-                    pipeline: build
+                    pipeline: poc_build
                     stage: build
                     job: build
                     source: build_artifact.txt
@@ -104,7 +118,7 @@ pipelines:
                 - linux
               tasks:
                 - fetch:
-                    pipeline: build
+                    pipeline: poc_build
                     stage: build
                     job: build
                     source: build_artifact.txt
@@ -116,3 +130,30 @@ pipelines:
                       - "echo OWASP!"
                       - ">"
                       - owasp.txt
+  poc_deploy:
+    group: poc
+    lock_behavior: none
+    materials:
+      setup:
+        pipeline: poc_setup
+        stage: setup
+      build:
+        pipeline: poc_build
+        stage: build
+    tabs:
+      build: deploy_artifact.txt
+    stages:
+      - deploy:
+          clean_workspace: true
+          jobs:
+            deploy:
+              resources:
+                - linux
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - "echo Hello World!"
+                      - ">"
+                      - deploy_artifact.txt
