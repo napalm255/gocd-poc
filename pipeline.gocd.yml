@@ -1,0 +1,41 @@
+---
+format_version: 2
+environments:
+  pocenv:
+    environment_variables:
+      DEPLOYMENT: testing
+pipelines:
+  poc:
+    group: demo
+    lock_behavior: none
+    materials:
+      powerbash:
+        git: https://github.com/napalm255/powerbash.git
+        branch: master
+        destination: powerbash
+      vmware_drs:
+        git: https://github.com/napalm255/ansible-vmware_drs.git
+        branch: master
+        destination: vmware_drs
+    stages:
+      - setup:
+          clean_workspace: true
+          jobs:
+            virtualenv:
+              tasks:
+                - exec:
+                    command: echo
+                    arguments:
+                      - "Hello World"
+                - exec:
+                    command: /usr/bin/python
+                    arguments:
+                      - -m
+                      - virtualenv
+                      - venv
+                - exec:
+                    command: venv/bin/python
+                    arguments:
+                      - -m
+                      - pip
+                      - list
