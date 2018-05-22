@@ -7,6 +7,8 @@ environments:
     pipelines:
       - poc_setup
       - poc_build
+      - poc_tests
+      - poc_deploy
     agents:
       - 59694d0c-c8b8-4247-89d5-962f2f0bd0b4
 pipelines:
