@@ -9,7 +9,6 @@ environments:
 pipelines:
   proof_of_concept:
     group: mygroup
-    label_template: "${mygit[:8]}"
     lock_behavior: none
     parameters:
       param1: value1
