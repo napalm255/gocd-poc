@@ -95,9 +95,10 @@ pipelines:
                     job: build
                     is_file: true
                     source: build/powerbash.sh
-                    destination: powerbash.sh
+                    destination: build/
                 - exec:
                     command: /bin/cat
+                    working_directory: build
                     arguments:
                       - powerbash.sh
             sonar:
@@ -110,10 +111,12 @@ pipelines:
                     pipeline: poc_build
                     stage: build
                     job: build
-                    source: powerbash.sh
-                    destination: powerbash.sh
+                    is_file: true
+                    source: build/powerbash.sh
+                    destination: build/
                 - exec:
                     command: /bin/cat
+                    working_directory: build
                     arguments:
                       - powerbash.sh
             owasp:
@@ -126,10 +129,12 @@ pipelines:
                     pipeline: poc_build
                     stage: build
                     job: build
-                    source: powerbash.sh
-                    destination: powerbash.sh
+                    is_file: true
+                    source: build/powerbash.sh
+                    destination: build/
                 - exec:
                     command: /bin/cat
+                    working_directory: build
                     arguments:
                       - powerbash.sh
   poc_deploy:
