@@ -23,6 +23,7 @@ pipelines:
     artifacts:
       - venv:
           source: venv/
+          destination: venv/
     stages:
       - setup:
           jobs:
