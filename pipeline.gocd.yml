@@ -20,13 +20,13 @@ pipelines:
         git: https://github.com/napalm255/ansible-vmware_drs.git
         branch: master
         destination: vmware_drs
-    artifacts:
-      - venv:
-          source: venv/
     stages:
       - setup:
           jobs:
             virtualenv:
+              artifacts:
+                - venv:
+                    source: venv/
               resources:
                 - python
               tasks:
@@ -55,14 +55,13 @@ pipelines:
         destination: powerbash
     tabs:
       build: powerbash.sh
-    artifacts:
-      - results:
-          source: powerbash.sh
-          destination: powerbash.sh
     stages:
       - build:
           jobs:
             build:
+              artifacts:
+                - binary:
+                    source: powerbash.sh
               resources:
                 - linux
               tasks:
@@ -78,12 +77,12 @@ pipelines:
       build:
         pipeline: poc_build
         stage: build
-    tabs:
-      test: unit_tests.txt
     stages:
       - tests:
           jobs:
             unit_tests:
+              tabs:
+                - test: powerbash.sh
               resources:
                 - linux
               tasks:
@@ -98,6 +97,8 @@ pipelines:
                     arguments:
                       - powerbash.sh
             sonar:
+              tabs:
+                - test: powerbash.sh
               resources:
                 - linux
               tasks:
@@ -112,6 +113,8 @@ pipelines:
                     arguments:
                       - powerbash.sh
             owasp:
+              tabs:
+                - test: powerbash.sh
               resources:
                 - linux
               tasks:
@@ -138,8 +141,6 @@ pipelines:
       tests:
         pipeline: poc_tests
         stage: tests
-    tabs:
-      build: deploy_artifact.txt
     stages:
       - deploy:
           jobs:
@@ -148,9 +149,6 @@ pipelines:
                 - linux
               tasks:
                 - exec:
-                    command: /bin/bash
+                    command: /bin/cat
                     arguments:
-                      - -c
-                      - "echo Hello World!"
-                      - ">"
-                      - deploy_artifact.txt
+                      - powerbash.sh
