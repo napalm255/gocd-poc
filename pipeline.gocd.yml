@@ -27,7 +27,6 @@ pipelines:
               artifacts:
                 - build:
                     source: venv/
-                    destination: venv/
               resources:
                 - python
               tabs:
