@@ -65,6 +65,7 @@ pipelines:
               artifacts:
                 - build:
                     source: powerbash/powerbash.sh
+                    destination: build/
               tasks:
                 - exec:
                     command: /bin/cat
@@ -93,7 +94,7 @@ pipelines:
                     stage: build
                     job: build
                     is_file: true
-                    source: powerbash.sh
+                    source: build/powerbash.sh
                     destination: powerbash.sh
                 - exec:
                     command: /bin/cat
