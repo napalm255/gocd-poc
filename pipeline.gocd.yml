@@ -25,7 +25,7 @@ pipelines:
           jobs:
             virtualenv:
               artifacts:
-                - venv:
+                - build:
                     source: venv/
               resources:
                 - python
@@ -60,7 +60,7 @@ pipelines:
           jobs:
             build:
               artifacts:
-                - binary:
+                - build:
                     source: powerbash.sh
               resources:
                 - linux
