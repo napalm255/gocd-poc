@@ -64,7 +64,7 @@ pipelines:
                 - linux
               artifacts:
                 - build:
-                    source: powerbash.sh
+                    source: powerbash/powerbash.sh
                     dest: build/powerbash.sh
               tasks:
                 - exec:
