@@ -60,8 +60,6 @@ pipelines:
       - build:
           jobs:
             build:
-              tabs:
-                build: powerbash/powerbash.sh
               resources:
                 - linux
               tasks:
