@@ -30,6 +30,8 @@ pipelines:
                     destination: venv/
               resources:
                 - python
+              tabs:
+                build: requirements.txt
               tasks:
                 - exec:
                     command: /usr/bin/python
