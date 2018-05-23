@@ -62,6 +62,10 @@ pipelines:
             build:
               resources:
                 - linux
+              artifacts:
+                - build:
+                    source: powerbash.sh
+                    dest: build/powerbash.sh
               tasks:
                 - exec:
                     command: /bin/cat
