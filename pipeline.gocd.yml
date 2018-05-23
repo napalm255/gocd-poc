@@ -23,7 +23,6 @@ pipelines:
     artifacts:
       - venv:
           source: venv/
-          destination: venv/
     stages:
       - setup:
           jobs:
@@ -69,6 +68,7 @@ pipelines:
               tasks:
                 - exec:
                     command: /bin/cat
+                    working_directory: powerbash
                     arguments:
                       - powerbash.sh
   poc_tests:
