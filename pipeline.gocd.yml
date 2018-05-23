@@ -65,7 +65,6 @@ pipelines:
               artifacts:
                 - build:
                     source: powerbash/powerbash.sh
-                    dest: build/powerbash.sh
               tasks:
                 - exec:
                     command: /bin/cat
@@ -75,6 +74,7 @@ pipelines:
   poc_tests:
     group: poc
     lock_behavior: none
+    fetch_materials: true
     materials:
       build:
         pipeline: poc_build
