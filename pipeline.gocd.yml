@@ -53,8 +53,6 @@ pipelines:
         git: https://github.com/napalm255/powerbash.git
         branch: master
         destination: powerbash
-    tabs:
-      build: powerbash.sh
     stages:
       - build:
           jobs:
@@ -62,6 +60,8 @@ pipelines:
               artifacts:
                 - build:
                     source: powerbash.sh
+              tabs:
+                build: powerbash.sh
               resources:
                 - linux
               tasks:
@@ -82,7 +82,7 @@ pipelines:
           jobs:
             unit_tests:
               tabs:
-                - test: powerbash.sh
+                test: powerbash.sh
               resources:
                 - linux
               tasks:
@@ -98,7 +98,7 @@ pipelines:
                       - powerbash.sh
             sonar:
               tabs:
-                - test: powerbash.sh
+                test: powerbash.sh
               resources:
                 - linux
               tasks:
@@ -114,7 +114,7 @@ pipelines:
                       - powerbash.sh
             owasp:
               tabs:
-                - test: powerbash.sh
+                test: powerbash.sh
               resources:
                 - linux
               tasks:
