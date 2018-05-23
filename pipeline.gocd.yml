@@ -92,6 +92,7 @@ pipelines:
                     pipeline: poc_build
                     stage: build
                     job: build
+                    is_file: true
                     source: powerbash.sh
                     destination: powerbash.sh
                 - exec:
