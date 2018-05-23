@@ -27,6 +27,7 @@ pipelines:
               artifacts:
                 - build:
                     source: venv/
+                    destination: venv/
               resources:
                 - python
               tasks:
@@ -60,6 +61,7 @@ pipelines:
               artifacts:
                 - build:
                     source: powerbash.sh
+                    destination: build/
               tabs:
                 build: powerbash.sh
               resources:
