@@ -60,10 +60,6 @@ pipelines:
       - build:
           jobs:
             build:
-              artifacts:
-                - build:
-                    source: powerbash.sh
-                    destination: build/
               tabs:
                 build: powerbash.sh
               resources:
